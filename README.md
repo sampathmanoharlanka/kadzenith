@@ -1,7 +1,5 @@
 # Kadzenith
 
-make an best prototype for hackathon want qualify in 701 teams be in top 10 teams as it do great like proffesional apps without single mistake and the code should look like human did all should be easy
-
 This project was built with [Lovable](https://lovable.dev).
 
 **Live app**: https://kadzenith.lovable.app
