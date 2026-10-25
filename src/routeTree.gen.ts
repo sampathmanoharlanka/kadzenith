@@ -10,33 +10,248 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthedRouteImport } from './routes/_authed'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthedCrpRouteImport } from './routes/_authed/crp'
+import { Route as AuthedFarmerRouteImport } from './routes/_authed/farmer'
+import { Route as AuthedLabourRouteImport } from './routes/_authed/labour'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiSpeechRouteImport } from './routes/api/speech'
+import { Route as ApiTranscribeRouteImport } from './routes/api/transcribe'
+import { Route as AuthedCrpIndexRouteImport } from './routes/_authed/crp/index'
+import { Route as AuthedCrpRatesRouteImport } from './routes/_authed/crp/rates'
+import { Route as AuthedCrpSchedulesRouteImport } from './routes/_authed/crp/schedules'
+import { Route as AuthedFarmerIndexRouteImport } from './routes/_authed/farmer/index'
+import { Route as AuthedFarmerAssistantRouteImport } from './routes/_authed/farmer/assistant'
+import { Route as AuthedFarmerBookRouteImport } from './routes/_authed/farmer/book'
+import { Route as AuthedFarmerSchedulesRouteImport } from './routes/_authed/farmer/schedules'
+import { Route as AuthedFarmerTestsRouteImport } from './routes/_authed/farmer/tests'
+import { Route as AuthedLabourIndexRouteImport } from './routes/_authed/labour/index'
+import { Route as AuthedFarmerBookingsBookingIdRouteImport } from './routes/_authed/farmer/bookings.$bookingId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthedRoute = AuthedRouteImport.update({
+  id: '/_authed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthedCrpRoute = AuthedCrpRouteImport.update({
+  id: '/crp',
+  path: '/crp',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedFarmerRoute = AuthedFarmerRouteImport.update({
+  id: '/farmer',
+  path: '/farmer',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedLabourRoute = AuthedLabourRouteImport.update({
+  id: '/labour',
+  path: '/labour',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSpeechRoute = ApiSpeechRouteImport.update({
+  id: '/api/speech',
+  path: '/api/speech',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTranscribeRoute = ApiTranscribeRouteImport.update({
+  id: '/api/transcribe',
+  path: '/api/transcribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthedCrpIndexRoute = AuthedCrpIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthedCrpRoute,
+} as any)
+const AuthedCrpRatesRoute = AuthedCrpRatesRouteImport.update({
+  id: '/rates',
+  path: '/rates',
+  getParentRoute: () => AuthedCrpRoute,
+} as any)
+const AuthedCrpSchedulesRoute = AuthedCrpSchedulesRouteImport.update({
+  id: '/schedules',
+  path: '/schedules',
+  getParentRoute: () => AuthedCrpRoute,
+} as any)
+const AuthedFarmerIndexRoute = AuthedFarmerIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthedFarmerRoute,
+} as any)
+const AuthedFarmerAssistantRoute = AuthedFarmerAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => AuthedFarmerRoute,
+} as any)
+const AuthedFarmerBookRoute = AuthedFarmerBookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => AuthedFarmerRoute,
+} as any)
+const AuthedFarmerSchedulesRoute = AuthedFarmerSchedulesRouteImport.update({
+  id: '/schedules',
+  path: '/schedules',
+  getParentRoute: () => AuthedFarmerRoute,
+} as any)
+const AuthedFarmerTestsRoute = AuthedFarmerTestsRouteImport.update({
+  id: '/tests',
+  path: '/tests',
+  getParentRoute: () => AuthedFarmerRoute,
+} as any)
+const AuthedLabourIndexRoute = AuthedLabourIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthedLabourRoute,
+} as any)
+const AuthedFarmerBookingsBookingIdRoute =
+  AuthedFarmerBookingsBookingIdRouteImport.update({
+    id: '/bookings/$bookingId',
+    path: '/bookings/$bookingId',
+    getParentRoute: () => AuthedFarmerRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/crp': typeof AuthedCrpRouteWithChildren
+  '/farmer': typeof AuthedFarmerRouteWithChildren
+  '/labour': typeof AuthedLabourRouteWithChildren
+  '/api/chat': typeof ApiChatRoute
+  '/api/speech': typeof ApiSpeechRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
+  '/crp/rates': typeof AuthedCrpRatesRoute
+  '/crp/schedules': typeof AuthedCrpSchedulesRoute
+  '/farmer/assistant': typeof AuthedFarmerAssistantRoute
+  '/farmer/book': typeof AuthedFarmerBookRoute
+  '/farmer/schedules': typeof AuthedFarmerSchedulesRoute
+  '/farmer/tests': typeof AuthedFarmerTestsRoute
+  '/crp/': typeof AuthedCrpIndexRoute
+  '/farmer/': typeof AuthedFarmerIndexRoute
+  '/labour/': typeof AuthedLabourIndexRoute
+  '/farmer/bookings/$bookingId': typeof AuthedFarmerBookingsBookingIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/speech': typeof ApiSpeechRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
+  '/crp/rates': typeof AuthedCrpRatesRoute
+  '/crp/schedules': typeof AuthedCrpSchedulesRoute
+  '/farmer/assistant': typeof AuthedFarmerAssistantRoute
+  '/farmer/book': typeof AuthedFarmerBookRoute
+  '/farmer/schedules': typeof AuthedFarmerSchedulesRoute
+  '/farmer/tests': typeof AuthedFarmerTestsRoute
+  '/crp': typeof AuthedCrpIndexRoute
+  '/farmer': typeof AuthedFarmerIndexRoute
+  '/labour': typeof AuthedLabourIndexRoute
+  '/farmer/bookings/$bookingId': typeof AuthedFarmerBookingsBookingIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authed': typeof AuthedRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_authed/crp': typeof AuthedCrpRouteWithChildren
+  '/_authed/farmer': typeof AuthedFarmerRouteWithChildren
+  '/_authed/labour': typeof AuthedLabourRouteWithChildren
+  '/api/chat': typeof ApiChatRoute
+  '/api/speech': typeof ApiSpeechRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
+  '/_authed/crp/rates': typeof AuthedCrpRatesRoute
+  '/_authed/crp/schedules': typeof AuthedCrpSchedulesRoute
+  '/_authed/farmer/assistant': typeof AuthedFarmerAssistantRoute
+  '/_authed/farmer/book': typeof AuthedFarmerBookRoute
+  '/_authed/farmer/schedules': typeof AuthedFarmerSchedulesRoute
+  '/_authed/farmer/tests': typeof AuthedFarmerTestsRoute
+  '/_authed/crp/': typeof AuthedCrpIndexRoute
+  '/_authed/farmer/': typeof AuthedFarmerIndexRoute
+  '/_authed/labour/': typeof AuthedLabourIndexRoute
+  '/_authed/farmer/bookings/$bookingId': typeof AuthedFarmerBookingsBookingIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/crp'
+    | '/farmer'
+    | '/labour'
+    | '/api/chat'
+    | '/api/speech'
+    | '/api/transcribe'
+    | '/crp/rates'
+    | '/crp/schedules'
+    | '/farmer/assistant'
+    | '/farmer/book'
+    | '/farmer/schedules'
+    | '/farmer/tests'
+    | '/crp/'
+    | '/farmer/'
+    | '/labour/'
+    | '/farmer/bookings/$bookingId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/api/chat'
+    | '/api/speech'
+    | '/api/transcribe'
+    | '/crp/rates'
+    | '/crp/schedules'
+    | '/farmer/assistant'
+    | '/farmer/book'
+    | '/farmer/schedules'
+    | '/farmer/tests'
+    | '/crp'
+    | '/farmer'
+    | '/labour'
+    | '/farmer/bookings/$bookingId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authed'
+    | '/login'
+    | '/_authed/crp'
+    | '/_authed/farmer'
+    | '/_authed/labour'
+    | '/api/chat'
+    | '/api/speech'
+    | '/api/transcribe'
+    | '/_authed/crp/rates'
+    | '/_authed/crp/schedules'
+    | '/_authed/farmer/assistant'
+    | '/_authed/farmer/book'
+    | '/_authed/farmer/schedules'
+    | '/_authed/farmer/tests'
+    | '/_authed/crp/'
+    | '/_authed/farmer/'
+    | '/_authed/labour/'
+    | '/_authed/farmer/bookings/$bookingId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthedRoute: typeof AuthedRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ApiSpeechRoute: typeof ApiSpeechRoute
+  ApiTranscribeRoute: typeof ApiTranscribeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +263,207 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authed': {
+      id: '/_authed'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authed/crp': {
+      id: '/_authed/crp'
+      path: '/crp'
+      fullPath: '/crp'
+      preLoaderRoute: typeof AuthedCrpRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/farmer': {
+      id: '/_authed/farmer'
+      path: '/farmer'
+      fullPath: '/farmer'
+      preLoaderRoute: typeof AuthedFarmerRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/labour': {
+      id: '/_authed/labour'
+      path: '/labour'
+      fullPath: '/labour'
+      preLoaderRoute: typeof AuthedLabourRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/speech': {
+      id: '/api/speech'
+      path: '/api/speech'
+      fullPath: '/api/speech'
+      preLoaderRoute: typeof ApiSpeechRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/transcribe': {
+      id: '/api/transcribe'
+      path: '/api/transcribe'
+      fullPath: '/api/transcribe'
+      preLoaderRoute: typeof ApiTranscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authed/crp/': {
+      id: '/_authed/crp/'
+      path: '/'
+      fullPath: '/crp/'
+      preLoaderRoute: typeof AuthedCrpIndexRouteImport
+      parentRoute: typeof AuthedCrpRoute
+    }
+    '/_authed/crp/rates': {
+      id: '/_authed/crp/rates'
+      path: '/rates'
+      fullPath: '/crp/rates'
+      preLoaderRoute: typeof AuthedCrpRatesRouteImport
+      parentRoute: typeof AuthedCrpRoute
+    }
+    '/_authed/crp/schedules': {
+      id: '/_authed/crp/schedules'
+      path: '/schedules'
+      fullPath: '/crp/schedules'
+      preLoaderRoute: typeof AuthedCrpSchedulesRouteImport
+      parentRoute: typeof AuthedCrpRoute
+    }
+    '/_authed/farmer/': {
+      id: '/_authed/farmer/'
+      path: '/'
+      fullPath: '/farmer/'
+      preLoaderRoute: typeof AuthedFarmerIndexRouteImport
+      parentRoute: typeof AuthedFarmerRoute
+    }
+    '/_authed/farmer/assistant': {
+      id: '/_authed/farmer/assistant'
+      path: '/assistant'
+      fullPath: '/farmer/assistant'
+      preLoaderRoute: typeof AuthedFarmerAssistantRouteImport
+      parentRoute: typeof AuthedFarmerRoute
+    }
+    '/_authed/farmer/book': {
+      id: '/_authed/farmer/book'
+      path: '/book'
+      fullPath: '/farmer/book'
+      preLoaderRoute: typeof AuthedFarmerBookRouteImport
+      parentRoute: typeof AuthedFarmerRoute
+    }
+    '/_authed/farmer/schedules': {
+      id: '/_authed/farmer/schedules'
+      path: '/schedules'
+      fullPath: '/farmer/schedules'
+      preLoaderRoute: typeof AuthedFarmerSchedulesRouteImport
+      parentRoute: typeof AuthedFarmerRoute
+    }
+    '/_authed/farmer/tests': {
+      id: '/_authed/farmer/tests'
+      path: '/tests'
+      fullPath: '/farmer/tests'
+      preLoaderRoute: typeof AuthedFarmerTestsRouteImport
+      parentRoute: typeof AuthedFarmerRoute
+    }
+    '/_authed/labour/': {
+      id: '/_authed/labour/'
+      path: '/'
+      fullPath: '/labour/'
+      preLoaderRoute: typeof AuthedLabourIndexRouteImport
+      parentRoute: typeof AuthedLabourRoute
+    }
+    '/_authed/farmer/bookings/$bookingId': {
+      id: '/_authed/farmer/bookings/$bookingId'
+      path: '/bookings/$bookingId'
+      fullPath: '/farmer/bookings/$bookingId'
+      preLoaderRoute: typeof AuthedFarmerBookingsBookingIdRouteImport
+      parentRoute: typeof AuthedFarmerRoute
+    }
   }
 }
 
+interface AuthedCrpRouteChildren {
+  AuthedCrpRatesRoute: typeof AuthedCrpRatesRoute
+  AuthedCrpSchedulesRoute: typeof AuthedCrpSchedulesRoute
+  AuthedCrpIndexRoute: typeof AuthedCrpIndexRoute
+}
+
+const AuthedCrpRouteChildren: AuthedCrpRouteChildren = {
+  AuthedCrpRatesRoute: AuthedCrpRatesRoute,
+  AuthedCrpSchedulesRoute: AuthedCrpSchedulesRoute,
+  AuthedCrpIndexRoute: AuthedCrpIndexRoute,
+}
+
+const AuthedCrpRouteWithChildren = AuthedCrpRoute._addFileChildren(
+  AuthedCrpRouteChildren,
+)
+
+interface AuthedFarmerRouteChildren {
+  AuthedFarmerAssistantRoute: typeof AuthedFarmerAssistantRoute
+  AuthedFarmerBookRoute: typeof AuthedFarmerBookRoute
+  AuthedFarmerSchedulesRoute: typeof AuthedFarmerSchedulesRoute
+  AuthedFarmerTestsRoute: typeof AuthedFarmerTestsRoute
+  AuthedFarmerIndexRoute: typeof AuthedFarmerIndexRoute
+  AuthedFarmerBookingsBookingIdRoute: typeof AuthedFarmerBookingsBookingIdRoute
+}
+
+const AuthedFarmerRouteChildren: AuthedFarmerRouteChildren = {
+  AuthedFarmerAssistantRoute: AuthedFarmerAssistantRoute,
+  AuthedFarmerBookRoute: AuthedFarmerBookRoute,
+  AuthedFarmerSchedulesRoute: AuthedFarmerSchedulesRoute,
+  AuthedFarmerTestsRoute: AuthedFarmerTestsRoute,
+  AuthedFarmerIndexRoute: AuthedFarmerIndexRoute,
+  AuthedFarmerBookingsBookingIdRoute: AuthedFarmerBookingsBookingIdRoute,
+}
+
+const AuthedFarmerRouteWithChildren = AuthedFarmerRoute._addFileChildren(
+  AuthedFarmerRouteChildren,
+)
+
+interface AuthedLabourRouteChildren {
+  AuthedLabourIndexRoute: typeof AuthedLabourIndexRoute
+}
+
+const AuthedLabourRouteChildren: AuthedLabourRouteChildren = {
+  AuthedLabourIndexRoute: AuthedLabourIndexRoute,
+}
+
+const AuthedLabourRouteWithChildren = AuthedLabourRoute._addFileChildren(
+  AuthedLabourRouteChildren,
+)
+
+interface AuthedRouteChildren {
+  AuthedCrpRoute: typeof AuthedCrpRouteWithChildren
+  AuthedFarmerRoute: typeof AuthedFarmerRouteWithChildren
+  AuthedLabourRoute: typeof AuthedLabourRouteWithChildren
+}
+
+const AuthedRouteChildren: AuthedRouteChildren = {
+  AuthedCrpRoute: AuthedCrpRouteWithChildren,
+  AuthedFarmerRoute: AuthedFarmerRouteWithChildren,
+  AuthedLabourRoute: AuthedLabourRouteWithChildren,
+}
+
+const AuthedRouteWithChildren =
+  AuthedRoute._addFileChildren(AuthedRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthedRoute: AuthedRouteWithChildren,
+  LoginRoute: LoginRoute,
+  ApiChatRoute: ApiChatRoute,
+  ApiSpeechRoute: ApiSpeechRoute,
+  ApiTranscribeRoute: ApiTranscribeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
