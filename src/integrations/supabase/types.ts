@@ -22,6 +22,7 @@ export type Database = {
           farmer_id: string
           farmer_name: string | null
           farmer_phone: string | null
+          field_location: string | null
           hours: number
           id: string
           labour_id: string | null
@@ -36,6 +37,7 @@ export type Database = {
           village: string | null
           work_date: string
           work_type_id: string
+          workers: number
         }
         Insert: {
           accepted_at?: string | null
@@ -44,6 +46,7 @@ export type Database = {
           farmer_id?: string
           farmer_name?: string | null
           farmer_phone?: string | null
+          field_location?: string | null
           hours: number
           id?: string
           labour_id?: string | null
@@ -58,6 +61,7 @@ export type Database = {
           village?: string | null
           work_date: string
           work_type_id: string
+          workers?: number
         }
         Update: {
           accepted_at?: string | null
@@ -66,6 +70,7 @@ export type Database = {
           farmer_id?: string
           farmer_name?: string | null
           farmer_phone?: string | null
+          field_location?: string | null
           hours?: number
           id?: string
           labour_id?: string | null
@@ -80,6 +85,7 @@ export type Database = {
           village?: string | null
           work_date?: string
           work_type_id?: string
+          workers?: number
         }
         Relationships: [
           {
@@ -87,6 +93,41 @@ export type Database = {
             columns: ["work_type_id"]
             isOneToOne: false
             referencedRelation: "work_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crop_plans: {
+        Row: {
+          area_acres: number | null
+          created_at: string
+          crop: string
+          farmer_id: string
+          id: string
+          sowing_date: string
+        }
+        Insert: {
+          area_acres?: number | null
+          created_at?: string
+          crop: string
+          farmer_id?: string
+          id?: string
+          sowing_date: string
+        }
+        Update: {
+          area_acres?: number | null
+          created_at?: string
+          crop?: string
+          farmer_id?: string
+          id?: string
+          sowing_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crop_plans_farmer_id_fkey"
+            columns: ["farmer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -111,6 +152,56 @@ export type Database = {
           district?: string
         }
         Relationships: []
+      }
+      farm_records: {
+        Row: {
+          amount: number
+          category: string
+          created_at: string
+          crop: string
+          farmer_id: string
+          id: string
+          kind: string
+          note: string | null
+          quantity: number | null
+          recorded_on: string
+          unit: string | null
+        }
+        Insert: {
+          amount: number
+          category: string
+          created_at?: string
+          crop: string
+          farmer_id?: string
+          id?: string
+          kind: string
+          note?: string | null
+          quantity?: number | null
+          recorded_on?: string
+          unit?: string | null
+        }
+        Update: {
+          amount?: number
+          category?: string
+          created_at?: string
+          crop?: string
+          farmer_id?: string
+          id?: string
+          kind?: string
+          note?: string | null
+          quantity?: number | null
+          recorded_on?: string
+          unit?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "farm_records_farmer_id_fkey"
+            columns: ["farmer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       lcc_readings: {
         Row: {
@@ -242,12 +333,84 @@ export type Database = {
           },
         ]
       }
+      soil_support_requests: {
+        Row: {
+          appointment_on: string | null
+          appointment_time: string | null
+          created_at: string
+          crop: string | null
+          crp_id: string | null
+          crp_name: string | null
+          crp_note: string | null
+          crp_phone: string | null
+          farmer_id: string
+          farmer_name: string | null
+          id: string
+          notes: string | null
+          preferred_date: string
+          preferred_slot: string
+          request_type: string
+          status: string
+          updated_at: string
+          village: string | null
+        }
+        Insert: {
+          appointment_on?: string | null
+          appointment_time?: string | null
+          created_at?: string
+          crop?: string | null
+          crp_id?: string | null
+          crp_name?: string | null
+          crp_note?: string | null
+          crp_phone?: string | null
+          farmer_id?: string
+          farmer_name?: string | null
+          id?: string
+          notes?: string | null
+          preferred_date: string
+          preferred_slot: string
+          request_type: string
+          status?: string
+          updated_at?: string
+          village?: string | null
+        }
+        Update: {
+          appointment_on?: string | null
+          appointment_time?: string | null
+          created_at?: string
+          crop?: string | null
+          crp_id?: string | null
+          crp_name?: string | null
+          crp_note?: string | null
+          crp_phone?: string | null
+          farmer_id?: string
+          farmer_name?: string | null
+          id?: string
+          notes?: string | null
+          preferred_date?: string
+          preferred_slot?: string
+          request_type?: string
+          status?: string
+          updated_at?: string
+          village?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "soil_support_requests_farmer_id_fkey"
+            columns: ["farmer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       soil_tests: {
         Row: {
           created_at: string
           ec: number | null
           farmer_id: string
           id: string
+          lab_name: string | null
           nitrogen: number | null
           organic_carbon: number | null
           ph: number | null
@@ -255,6 +418,7 @@ export type Database = {
           potassium: number | null
           recorded_by: string
           remarks: string | null
+          test_method: string | null
           tested_on: string
         }
         Insert: {
@@ -262,6 +426,7 @@ export type Database = {
           ec?: number | null
           farmer_id: string
           id?: string
+          lab_name?: string | null
           nitrogen?: number | null
           organic_carbon?: number | null
           ph?: number | null
@@ -269,6 +434,7 @@ export type Database = {
           potassium?: number | null
           recorded_by?: string
           remarks?: string | null
+          test_method?: string | null
           tested_on?: string
         }
         Update: {
@@ -276,6 +442,7 @@ export type Database = {
           ec?: number | null
           farmer_id?: string
           id?: string
+          lab_name?: string | null
           nitrogen?: number | null
           organic_carbon?: number | null
           ph?: number | null
@@ -283,11 +450,41 @@ export type Database = {
           potassium?: number | null
           recorded_by?: string
           remarks?: string | null
+          test_method?: string | null
           tested_on?: string
         }
         Relationships: [
           {
             foreignKeyName: "soil_tests_farmer_id_fkey"
+            columns: ["farmer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      task_completions: {
+        Row: {
+          completed_at: string
+          farmer_id: string
+          id: string
+          task_key: string
+        }
+        Insert: {
+          completed_at?: string
+          farmer_id?: string
+          id?: string
+          task_key: string
+        }
+        Update: {
+          completed_at?: string
+          farmer_id?: string
+          id?: string
+          task_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_completions_farmer_id_fkey"
             columns: ["farmer_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -360,6 +557,7 @@ export type Database = {
           farmer_id: string
           farmer_name: string | null
           farmer_phone: string | null
+          field_location: string | null
           hours: number
           id: string
           labour_id: string | null
@@ -374,6 +572,7 @@ export type Database = {
           village: string | null
           work_date: string
           work_type_id: string
+          workers: number
         }
         SetofOptions: {
           from: "*"
@@ -382,12 +581,49 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      booking_contact: {
+        Args: { _booking_id: string }
+        Returns: {
+          name: string
+          phone: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      registered_labour_count: { Args: never; Returns: number }
+      schedule_soil_visit: {
+        Args: { _at: string; _note?: string; _on: string; _request_id: string }
+        Returns: {
+          appointment_on: string | null
+          appointment_time: string | null
+          created_at: string
+          crop: string | null
+          crp_id: string | null
+          crp_name: string | null
+          crp_note: string | null
+          crp_phone: string | null
+          farmer_id: string
+          farmer_name: string | null
+          id: string
+          notes: string | null
+          preferred_date: string
+          preferred_slot: string
+          request_type: string
+          status: string
+          updated_at: string
+          village: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "soil_support_requests"
+          isOneToOne: true
+          isSetofReturn: false
+        }
       }
       update_booking_status: {
         Args: { _booking_id: string; _status: string }
@@ -398,6 +634,7 @@ export type Database = {
           farmer_id: string
           farmer_name: string | null
           farmer_phone: string | null
+          field_location: string | null
           hours: number
           id: string
           labour_id: string | null
@@ -412,10 +649,40 @@ export type Database = {
           village: string | null
           work_date: string
           work_type_id: string
+          workers: number
         }
         SetofOptions: {
           from: "*"
           to: "bookings"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      update_soil_request_status: {
+        Args: { _request_id: string; _status: string }
+        Returns: {
+          appointment_on: string | null
+          appointment_time: string | null
+          created_at: string
+          crop: string | null
+          crp_id: string | null
+          crp_name: string | null
+          crp_note: string | null
+          crp_phone: string | null
+          farmer_id: string
+          farmer_name: string | null
+          id: string
+          notes: string | null
+          preferred_date: string
+          preferred_slot: string
+          request_type: string
+          status: string
+          updated_at: string
+          village: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "soil_support_requests"
           isOneToOne: true
           isSetofReturn: false
         }
