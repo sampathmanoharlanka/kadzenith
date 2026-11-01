@@ -15,6 +15,13 @@
       "when": 1792906567450,
       "tag": "0001_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793498711899,
+      "tag": "0002_farmer_support_features",
+      "breakpoints": true
     }
   ]
 }
